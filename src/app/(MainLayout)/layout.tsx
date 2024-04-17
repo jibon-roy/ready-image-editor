@@ -2,6 +2,7 @@ import '@/app/globals.css'
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Icon from "@/app/(MainLayout)/favicon.ico"
+import Sitebg from '@/components/sitebg/sitebg';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,12 +17,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <head>
         <link rel="shortcut icon" href={Icon.src} type="image/x-icon" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Sitebg />
+        {children}
+
+      </body>
     </html>
   );
 }
