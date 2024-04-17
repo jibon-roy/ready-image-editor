@@ -22,9 +22,10 @@ const FileDropZone: React.FC<FileDropZoneProps> = ({ onFileDrop }) => {
         //     <input />
         //     {isDragActive ? <p>Drop the files here ...</p> : <p>Drag n drop some files here, or click to select files</p>}
         // </div>
-        <div {...getRootProps()} style={isDragActive ? dropZoneStyle : {}}>
+        <div {...getRootProps()} className='relative' >
+            <div style={isDragActive ? dropZoneStyle : { border: '2px dashed transparent' }} className='absolute w-[calc(100%+40px)] top-0 right-1/2 h-full translate-x-1/2'></div>
             <div className="w-full mx-auto my-12 px-5 sm:w-96 gap-4 min-h-72 h-full bg-primary-foreground flex justify-center items-center rounded-3xl relative py-1 text-sm leading-6 text-gray-600 flex-col ring-gray-900/10 hover:ring-gray-900/20 shadow-[-0px_10px_40px_5px_rgba(0,0,0,0.25)]">
-                <div className="bg-primary h-12 text-primary-foreground hover:bg-primary/80 transition px-6 py-4 flex justify-center items-center text-xl font-semibold rounded-full">
+                <div className="bg-primary h-12 text-primary-foreground text-center hover:bg-primary/80 transition px-6 py-4 flex justify-center items-center text-xl font-semibold rounded-full">
                     {isFileDialogActive ? "Select an image" : 'Upload Image'}
                 </div>
                 <div className='text-xl'> or, drop a file.</div>
@@ -39,7 +40,8 @@ const dropZoneStyle: React.CSSProperties = {
     borderRadius: '4px',
     textAlign: 'center',
     cursor: 'pointer',
-    backgroundColor: '#22222211'
+    backgroundColor: '#22222211',
+    zIndex: '1'
 };
 
 
