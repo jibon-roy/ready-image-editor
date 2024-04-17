@@ -1,10 +1,11 @@
-import { Navigation } from "@/components/navigation/navigation";
+import MainNavigation from "@/components/navigation/mainNavigation";
+
 
 
 export default function Home() {
   return (
     <>
-      <Navigation />
+      <MainNavigation />
     </>
   );
 }

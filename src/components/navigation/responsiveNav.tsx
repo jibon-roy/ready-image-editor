@@ -1,13 +1,14 @@
 import * as React from "react";
-import { Minus, Plus } from "lucide-react";
+import { Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { FiAlignRight } from "react-icons/fi";
 
-export function Navigation() {
+export function ResponsiveNav() {
   return (
-    <Drawer direction="left"> {/* Add a className to identify the left positioned drawer */}
+    <Drawer direction="left">
       <DrawerTrigger asChild>
-        <Button variant="outline">Open Drawer</Button>
+        <Button className="text-2xl h-auto py-1 px-2" variant="outline"><FiAlignRight /></Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
