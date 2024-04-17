@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 const Logo = () => {
     return (
-        <div className='flex items-center flex-wrap text-center'>
+        <div className='flex gap-2 items-center flex-wrap text-center'>
             <Image alt='Ready Image Editor' src={logoImg.src} width={40} height={40} />
-            <span className="mr-2 text-xl tracking-tight">ReadyIE</span>
+            <span className="text-xl tracking-tight">ReadyIE</span>
         </div>
     );
 };
