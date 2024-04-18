@@ -3,21 +3,45 @@
 import FileDropZone from "@/components/imagedrop/imagedrop";
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner"
 import axios from "axios"
+import { Toaster } from "@/components/ui/sonner";
 const Banner = () => {
-    const history = useRouter(); // Access the history object to navigate
+    const navigate = useRouter();
     const apiKey = 'a4fffb0560be3233ee3afb982b416ec0';
 
     const handleFileDrop = async (files: File[]) => {
-        console.log(JSON.stringify(files))
-        const imageFile = { image: files[0] };
-        const res = await axios.post(`https://api.imgbb.com/1/upload?key=${apiKey}`, imageFile, {
-            headers: {
-                "content-type": "multipart/form-data",
-            },
-        });
-        const imageURL = res.data.data.display_url;
-        console.log(imageURL)
+        try {
+            const imageFile = { image: files[0] };
+            const res = await axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${apiKey}`, imageFile, {
+                headers: {
+                    "content-type": "multipart/form-data",
+                },
+            });
+            toast.success("File has been uploaded.", {
+                description: Date.now(),
+                action: {
+                    label: "Ok",
+                    onClick: () => console.log("Undo"),
+                },
+            })
+
+            const imageURL: any = res.data?.data?.display_url;
+            const encodedImageUrl = encodeURIComponent(imageURL);
+            navigate.push(`/page?url=${encodedImageUrl}`);
+            // const imageURL = res.data.data;
+            // console.log(imageURL)
+            // navigate.push(`/edit?image=${imageURL}`)
+        } catch (error) {
+            toast.error("An error occurred while uploading the image.", {
+                description: Date.now(),
+                action: {
+                    label: "Ok",
+                    onClick: () => console.log("Undo"),
+                },
+            })
+            console.error(':', error);
+        }
     };
 
     return (
@@ -39,6 +63,7 @@ const Banner = () => {
                     <FileDropZone onFileDrop={handleFileDrop} />
                 </div>
             </div>
+            <Toaster position="top-right" />
         </section>
     );
 };
