@@ -13,7 +13,7 @@ const Banner = () => {
     const handleFileDrop = async (files: File[]) => {
         try {
             const imageFile = { image: files[0] };
-            const res = await axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${apiKey}`, imageFile, {
+            const res = await axios.post(`https://api.imgbb.com/1/upload?expiration=400&key=${apiKey}`, imageFile, {
                 headers: {
                     "content-type": "multipart/form-data",
                 },
@@ -28,7 +28,7 @@ const Banner = () => {
 
             const imageURL: any = res.data?.data?.display_url;
             const encodedImageUrl = encodeURIComponent(imageURL);
-            navigate.push(`/page?url=${encodedImageUrl}`);
+            navigate.push(`/edit?url=${encodedImageUrl}`);
             // const imageURL = res.data.data;
             // console.log(imageURL)
             // navigate.push(`/edit?image=${imageURL}`)
@@ -36,7 +36,7 @@ const Banner = () => {
             toast.error("An error occurred while uploading the image.", {
                 description: Date.now(),
                 action: {
-                    label: "Ok",
+                    label: "Try again",
                     onClick: () => console.log("Undo"),
                 },
             })

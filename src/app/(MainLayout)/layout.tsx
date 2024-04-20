@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Icon from "@/app/(MainLayout)/favicon.ico"
 import Sitebg from '@/components/sitebg/sitebg';
+import MainNavigation from '@/components/navigation/mainNavigation';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Sitebg />
+        <MainNavigation />
         {children}
 
       </body>
