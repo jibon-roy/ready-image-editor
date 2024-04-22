@@ -4,8 +4,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
-
-
 const EditImage = () => {
     const searchParams = useSearchParams()
     const [url, setUrl] = useState('')

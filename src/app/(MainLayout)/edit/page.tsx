@@ -1,15 +1,13 @@
+import { Suspense } from 'react'
+import EditImage from './editImage';
 
-
-
-const EditImage = () => {
-
-
+const Edit: React.FC = () => {
 
     return (
-        <div>
+        <Suspense>
             <EditImage />
-        </div>
+        </Suspense>
     );
 };
 
-export default EditImage;
+export default Edit;
