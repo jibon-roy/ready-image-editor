@@ -6,9 +6,14 @@ import { useRouter } from 'next/navigation';
 import { toast } from "sonner"
 import axios from "axios"
 import { Toaster } from "@/components/ui/sonner";
+import { useDispatch } from "react-redux";
+import { ChangelinkToLink } from "@/providers/redux/imageLinkSlice";
+import { useState } from "react";
 const Banner = () => {
     const navigate = useRouter();
     const apiKey = 'a4fffb0560be3233ee3afb982b416ec0';
+    const dispatch = useDispatch()
+    const [progressLoad, setProgressLoad] = useState(0)
 
     const handleFileDrop = async (files: File[]) => {
         try {
@@ -17,18 +22,18 @@ const Banner = () => {
                 headers: {
                     "content-type": "multipart/form-data",
                 },
-            });
-            toast.success("File has been uploaded.", {
-                description: Date.now(),
-                action: {
-                    label: "Ok",
-                    onClick: () => console.log("Undo"),
+                onUploadProgress: (progress) => {
+                    const total: any = progress.total
+                    const percent = Math.round((progress.loaded * 100) / total)
+                    setProgressLoad(percent)
                 },
-            })
+
+            });
 
             const imageURL: any = res.data?.data?.display_url;
             const encodedImageUrl = encodeURIComponent(imageURL);
             navigate.push(`/edit?url=${encodedImageUrl}`);
+            dispatch(ChangelinkToLink(imageURL))
             // const imageURL = res.data.data;
             // console.log(imageURL)
             // navigate.push(`/edit?image=${imageURL}`)
@@ -60,7 +65,7 @@ const Banner = () => {
                             </Button>
                         </div>
                     </div>
-                    <FileDropZone onFileDrop={handleFileDrop} />
+                    <FileDropZone progress={progressLoad} onFileDrop={handleFileDrop} />
                 </div>
             </div>
             <Toaster position="top-right" />

@@ -6,10 +6,12 @@ const imageLinkSlice = createSlice({
         link: ''
     },
     reducers: {
-        changelink(state, action) {
-
+        ChangelinkToLink(state, action) {
+            state.link = action.payload
         }
     }
 })
 
 export default imageLinkSlice.reducer
+
+export const { ChangelinkToLink } = imageLinkSlice.actions

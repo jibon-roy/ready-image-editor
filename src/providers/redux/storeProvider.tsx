@@ -4,7 +4,7 @@ import { store } from './store';
 import React from 'react';
 
 
-const storeProvider = ({ children }: any) => {
+const StoreProvider = ({ children }: any) => {
     return (
         <Provider store={store}>
             {children}
@@ -12,4 +12,4 @@ const storeProvider = ({ children }: any) => {
     );
 };
 
-export default storeProvider;
+export default StoreProvider;

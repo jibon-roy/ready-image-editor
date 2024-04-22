@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Icon from "@/app/(MainLayout)/favicon.ico"
 import Sitebg from '@/components/sitebg/sitebg';
 import MainNavigation from '@/components/navigation/mainNavigation';
+import StoreProvider from '@/providers/redux/storeProvider';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,16 +22,17 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en">
-      <head>
-        <link rel="shortcut icon" href={Icon.src} type="image/x-icon" />
-      </head>
-      <body className={inter.className}>
-        <Sitebg />
-        <MainNavigation />
-        {children}
-
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <head>
+          <link rel="shortcut icon" href={Icon.src} type="image/x-icon" />
+        </head>
+        <body className={inter.className}>
+          <Sitebg />
+          <MainNavigation />
+          {children}
+        </body>
+      </html>
+    </StoreProvider>
   );
 }
